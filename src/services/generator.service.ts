@@ -21,6 +21,7 @@ import {
   INNER_CLASS_TEMPLATE,
   INNER_CLASS_TYPE_KEY,
   S_C_S_VARIABLE_TEMPLATE,
+  STATIC_INNER_CLASS_TEMPLATE,
 } from "../constants/generator.constants";
 import { AssetDirectoryDTO } from "../dtos/assets.dto";
 
@@ -122,6 +123,7 @@ export class AssetsGeneratorService {
           mainAssetsClassInnerClasses += this.generateInnerClass({
             className: key,
             isPrivate: true,
+            isStatic: true,
           });
           generatedClasses.push(
             generateClassContent(value as AssetDirectoryDTO, key)
@@ -173,19 +175,20 @@ export class AssetsGeneratorService {
   private generateInnerClass({
     className,
     isPrivate = true,
+    isStatic = false,
   }: {
     className: string;
     isPrivate?: boolean;
+    isStatic?: boolean;
   }): string {
     let modifiedClassName = className.toUnixFileName().firstLetterToUpperCase();
     if (isPrivate) {
       modifiedClassName = `_${modifiedClassName}`;
     }
 
-    const generatedInnerClass = INNER_CLASS_TEMPLATE.replace(
-      INNER_CLASS_TYPE_KEY,
-      modifiedClassName
-    )
+    const temp = isStatic ? STATIC_INNER_CLASS_TEMPLATE : INNER_CLASS_TEMPLATE;
+    const generatedInnerClass = temp
+      .replace(INNER_CLASS_TYPE_KEY, modifiedClassName)
       .replace(INNER_CLASS_NAME_KEY, className.toUnixFileName())
       .replace(INNER_CLASS_TYPE_KEY, modifiedClassName);
     return generatedInnerClass;

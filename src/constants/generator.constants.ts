@@ -26,11 +26,12 @@ export const GENERATED_TEMPLATE =
 export const CLASS_DEFINITION_TEMPLATE =
   `@immutable\n` +
   `final class ${CLASS_DEFINITION_TEMPLATE_KEY} {\n` +
-  `  const ${CLASS_DEFINITION_CONSTRUCTER_KEY}._();\n` +
+  `  ${CLASS_DEFINITION_CONSTRUCTER_KEY}._();\n` +
   `${CLASS_INNER_CLASSES_KEY}\n` +
   `${CLASS_INNER_CODE_KEY}\n` +
   `}\n\n`;
 
-export const INNER_CLASS_TEMPLATE = `  static final ${INNER_CLASS_TYPE_KEY} ${INNER_CLASS_NAME_KEY} = ${INNER_CLASS_TYPE_KEY}._();\n`;
+export const STATIC_INNER_CLASS_TEMPLATE = `  static final ${INNER_CLASS_TYPE_KEY} ${INNER_CLASS_NAME_KEY} = ${INNER_CLASS_TYPE_KEY}._();\n`;
+export const INNER_CLASS_TEMPLATE = `  final ${INNER_CLASS_TYPE_KEY} ${INNER_CLASS_NAME_KEY} = ${INNER_CLASS_TYPE_KEY}._();\n`;
 export const S_C_S_VARIABLE_TEMPLATE = `  static const String ${ASSET_VARIABLE_KEY} = '${ASSET_VARIABLE_VALUE}';\n`;
 export const F_VARIABLE_TEMPLATE = `  final String ${ASSET_VARIABLE_KEY} = '${ASSET_VARIABLE_VALUE}';\n`;
